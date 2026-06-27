@@ -5,8 +5,9 @@
 ![yt-dlp](https://img.shields.io/badge/yt--dlp-latest-FF0000?logo=youtube&logoColor=white)
 ![Spotify](https://img.shields.io/badge/Spotify-API-1DB954?logo=spotify&logoColor=white)
 ![SoundCloud](https://img.shields.io/badge/SoundCloud-supported-FF5500?logo=soundcloud&logoColor=white)
+![TikTok](https://img.shields.io/badge/TikTok-supported-000000?logo=tiktok&logoColor=white)
 
-Discord музыкальный бот с поддержкой YouTube, SoundCloud и Spotify
+Discord музыкальный бот с поддержкой YouTube, SoundCloud, Spotify и TikTok.
 
 ![Now Playing](preview.png)
 
@@ -17,15 +18,17 @@ Discord музыкальный бот с поддержкой YouTube, SoundClou
 ![YouTube](https://img.shields.io/badge/YouTube-треки%20и%20плейлисты-FF0000?logo=youtube&logoColor=white)
 ![SoundCloud](https://img.shields.io/badge/SoundCloud-треки%20и%20сеты-FF5500?logo=soundcloud&logoColor=white)
 ![Spotify](https://img.shields.io/badge/Spotify-треки%20и%20альбомы-1DB954?logo=spotify&logoColor=white)
+![TikTok](https://img.shields.io/badge/TikTok-аудио-000000?logo=tiktok&logoColor=white)
 
 - Плейлисты до 50 треков, YouTube Mix
+- Несколько ссылок за один `/play` — каждая на новой строке
 - Управление через кнопки без slash-команд
 - Очередь с историей треков
 - Loop — повтор текущего трека
 - Shuffle — случайный порядок
 - Громкость сохраняется между сессиями
 - Сохранить трек — отправляет ссылки в ЛС
-- Обложки треков из YouTube и Spotify
+- Обложки треков из YouTube, Spotify и TikTok
 
 ---
 
@@ -40,10 +43,10 @@ Discord музыкальный бот с поддержкой YouTube, SoundClou
 | 🔉 / 🔊 | Громкость |
 | 📋 | Показать очередь |
 | 💾 | Сохранить трек в ЛС |
-| ♾️ | Повтор трека |
+| ∞ | Loop |
 | 🔁 | Перезапустить трек |
 | ⏹ | Стоп |
-| 🔀 | Рандомное воспроизведение |
+| 🔀 | Shuffle |
 
 ---
 
@@ -52,6 +55,7 @@ Discord музыкальный бот с поддержкой YouTube, SoundClou
 | Команда | Описание |
 |---------|----------|
 | `/play [запрос или ссылка]` | Воспроизвести трек или плейлист |
+| `/play [ссылка1\nссылка2]` | Несколько ссылок сразу |
 | `/search [запрос]` | Поиск на YouTube с выбором из 5 результатов |
 
 ---
