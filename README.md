@@ -7,7 +7,7 @@
 ![SoundCloud](https://img.shields.io/badge/SoundCloud-supported-FF5500?logo=soundcloud&logoColor=white)
 ![TikTok](https://img.shields.io/badge/TikTok-supported-000000?logo=tiktok&logoColor=white)
 
-Discord музыкальный бот с поддержкой YouTube, SoundCloud, Spotify и TikTok.
+Discord музыкальный бот с поддержкой YouTube, SoundCloud, Spotify и TikTok
 
 ![Now Playing](preview.png)
 
@@ -43,10 +43,10 @@ Discord музыкальный бот с поддержкой YouTube, SoundClou
 | 🔉 / 🔊 | Громкость |
 | 📋 | Показать очередь |
 | 💾 | Сохранить трек в ЛС |
-| ∞ | Loop |
+| ♾️ | Повтор |
 | 🔁 | Перезапустить трек |
 | ⏹ | Стоп |
-| 🔀 | Shuffle |
+| 🔀 | Рандом |
 
 ---
 
