@@ -18,13 +18,15 @@ Discord музыкальный бот с поддержкой YouTube, SoundClou
 
 ![YouTube](https://img.shields.io/badge/YouTube-треки%20и%20плейлисты-FF0000?logo=youtube&logoColor=white)
 ![SoundCloud](https://img.shields.io/badge/SoundCloud-треки%20и%20сеты-FF5500?logo=soundcloud&logoColor=white)
-![Spotify](https://img.shields.io/badge/Spotify-треки%20и%20альбомы-1DB954?logo=spotify&logoColor=white)
+![Spotify](https://img.shields.io/badge/Spotify-треки%2C%20альбомы%20и%20плейлисты-1DB954?logo=spotify&logoColor=white)
 ![TikTok](https://img.shields.io/badge/TikTok-аудио-000000?logo=tiktok&logoColor=white)
 ![Telegram](https://img.shields.io/badge/Telegram-аудио%20из%20постов-2CA5E0?logo=telegram&logoColor=white)
 
 - Плейлисты до 50 треков, YouTube Mix
-- Несколько ссылок за один `/play` — каждая на новой строке
+- Плейлисты Spotify (публичные всегда, приватные — с `SPOTIFY_SP_DC`), до 100 треков
+- Несколько ссылок за один `/play` — каждая на новой строке (можно вставлять даже целиком код `<iframe>` от Spotify — бот сам вытащит ссылку)
 - Управление через кнопки без slash-команд
+- Панель управления доступна в нескольких каналах одновременно (`/menu`)
 - Очередь с историей треков (до 10)
 - Предзагрузка следующего трека в фоне
 - Повтор текущего трека
@@ -70,6 +72,7 @@ SPOTIFY_REFRESH_TOKEN=получается_через_spotify-auth.js
 TG_API_ID=твой_telegram_api_id
 TG_API_HASH=твой_telegram_api_hash
 TG_SESSION=получается_через_tg-auth.js
+SPOTIFY_SP_DC=опционально_для_приватных_плейлистов
 ```
 
 - Токен бота — [Discord Developer Portal](https://discord.com/developers/applications)
@@ -82,16 +85,43 @@ TG_SESSION=получается_через_tg-auth.js
 node spotify-auth.js
 ```
 
+**Приватные плейлисты Spotify** (опционально): официальный API не даёт доступа к чужим и приватным плейлистам (ограничение Development mode). Бот автоматически переходит на публичную embed-страницу Spotify, но для приватных плейлистов ей тоже нужна авторизация
+
+Чтобы бот видел твои приватные плейлисты — добавь cookie `sp_dc` из браузера:
+1. Открой [open.spotify.com](https://open.spotify.com) и залогинься
+2. F12 → Application → Cookies → open.spotify.com → скопируй значение `sp_dc`
+3. Добавь в `.env`: `SPOTIFY_SP_DC=значение`
+
+⚠️ Этот cookie даёт доступ к твоему аккаунту — никому не показывай его и не публикуй (я тебя предупредил)
+
+**Несколько Spotify-аккаунтов** (для ботов на разных серверах с разными владельцами): можно добавить несколько cookie сразу:
+
+```env
+SPOTIFY_SP_DC=основной_аккаунт
+SPOTIFY_SP_DC_1=аккаунт_друга_1
+SPOTIFY_SP_DC_2=аккаунт_друга_2
+```
+
+Каждый сервер выбирает свой аккаунт командой:
+```
+/settings spotify_account номер:1
+```
+
+Если ничего не настроено — используется `SPOTIFY_SP_DC` по умолчанию для всех серверов. `номер:0` отключает привязку и возвращает дефолтный аккаунт
+
 ### 4. Авторизация Telegram
 
 ```bash
 node tg-auth.js
 ```
 
-### 5. Cookies (опционально)
+### 5. Cookies (обязательно для YouTube/SoundCloud)
 
-Для обхода ограничений YouTube положи файл `cookies.txt` в папку с ботом.
-Экспортировать можно через расширение [Get cookies.txt](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc) в Chrome.
+Положи файл `cookies.txt` в папку с ботом. Экспортировать можно через расширение [Get cookies.txt](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc) в Chrome
+
+**Важно:** YouTube периодически ротирует cookies по соображениям безопасности — если бот перестал качать треки, обнови `cookies.txt` заново тем же способом.
+
+**SoundCloud rate limit:** при слишком частых запросах (например много плейлистов подряд) SoundCloud может временно заблокировать IP сервера с ошибкой `429 Too Many Requests`. Это не баг бота — блокировка снимается сама обычно в течение 1-2 часов
 
 ### 6. Запустить
 
@@ -153,9 +183,11 @@ sudo systemctl start music-bot
 |---------|----------|
 | `/play [запрос или ссылка]` | Воспроизвести трек или плейлист |
 | `/search [запрос]` | Поиск на YouTube с выбором из 5 результатов |
+| `/menu` | Открыть панель управления в текущем канале |
 | `/online` | Бот заходит в канал и не выходит пока не скажешь `/offline` |
 | `/offline` | Бот выходит из голосового канала |
 | `/settings prefetch` | Включить/выключить предзагрузку треков |
+| `/settings spotify_account` | Выбрать Spotify-аккаунт для приватных плейлистов на этом сервере |
 
 ---
 
